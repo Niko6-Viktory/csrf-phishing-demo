@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 rootProject.name = 'restCSRFProject'
+=======
+rootProject.name = 'attacker'
+>>>>>>> 39edab1 (CSRF attack demo project)

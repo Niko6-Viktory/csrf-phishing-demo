@@ -1,12 +1,20 @@
 plugins {
     id 'java'
+<<<<<<< HEAD
     id 'org.springframework.boot' version '4.0.4'
+=======
+    id 'org.springframework.boot' version '4.0.5'
+>>>>>>> 39edab1 (CSRF attack demo project)
     id 'io.spring.dependency-management' version '1.1.7'
 }
 
 group = 'kz.bitlab'
 version = '0.0.1-SNAPSHOT'
+<<<<<<< HEAD
 description = 'restCSRFProject'
+=======
+description = 'attacker'
+>>>>>>> 39edab1 (CSRF attack demo project)
 
 java {
     toolchain {
@@ -14,17 +22,21 @@ java {
     }
 }
 
+<<<<<<< HEAD
 configurations {
     compileOnly {
         extendsFrom annotationProcessor
     }
 }
 
+=======
+>>>>>>> 39edab1 (CSRF attack demo project)
 repositories {
     mavenCentral()
 }
 
 dependencies {
+<<<<<<< HEAD
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-webmvc'
     compileOnly 'org.projectlombok:lombok'
@@ -32,6 +44,11 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-data-jpa-test'
+=======
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.springframework.boot:spring-boot-starter-webmvc'
+    testImplementation 'org.springframework.boot:spring-boot-starter-thymeleaf-test'
+>>>>>>> 39edab1 (CSRF attack demo project)
     testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
