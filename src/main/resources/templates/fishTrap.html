@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JACKPOT WINNER | CONFIRMED</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Oswald:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #ffcc00;
+            --gold-glow: rgba(255, 204, 0, 0.5);
+            --card-bg: rgba(0, 10, 20, 0.6);
+            --border: rgba(255, 204, 0, 0.3);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            color: white;
+            background: #000;
+        }
+
+        /* --- ФОН С РАЗМЫТИЕМ --- */
+        .match-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -2;
+            /* ВСТАВЬ СВОЮ ССЫЛКУ НИЖЕ */
+            background-image: url('socc.jpg');
+            background-size: cover;
+            background-position: center;
+            filter: blur(5px) brightness(0.4);
+            transform: scale(1.1);
+        }
+
+        /* --- КОНФЕТТИ КОНТЕЙНЕР --- */
+        #confetti-wrapper {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; /* Чтобы не мешало нажимать на кнопку */
+            z-index: 1;
+        }
+
+        .confetti {
+            position: absolute;
+            top: -10px;
+            border-radius: 2px;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(110vh) rotate(720deg); }
+        }
+
+        /* --- КАРТОЧКА --- */
+        .container { perspective: 1500px; z-index: 10; position: relative; }
+
+        .main-card {
+            position: relative;
+            width: 480px;
+            padding: 50px;
+            background: var(--card-bg);
+            backdrop-filter: blur(20px) saturate(160%);
+            -webkit-backdrop-filter: blur(20px) saturate(160%);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            text-align: center;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.8), 0 0 30px var(--gold-glow);
+            transition: transform 0.1s ease-out;
+            transform-style: preserve-3d;
+        }
+
+        .main-card::before {
+            content: "VIP ACCESS";
+            position: absolute;
+            top: 15px; left: 15px;
+            font-size: 10px;
+            font-weight: 800;
+            color: var(--gold);
+            letter-spacing: 2px;
+            opacity: 0.6;
+        }
+
+        h1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 70px;
+            line-height: 0.85;
+            margin: 20px 0;
+            text-transform: uppercase;
+            background: linear-gradient(to bottom, #fff, var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 10px rgba(255,204,0,0.3));
+        }
+
+        .prize-box {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255,204,0,0.1);
+        }
+
+        .btn-main {
+            display: block;
+            width: 100%;
+            padding: 22px;
+            background: var(--gold);
+            color: #000;
+            text-decoration: none;
+            font-weight: 900;
+            font-size: 20px;
+            border-radius: 12px;
+            text-transform: uppercase;
+            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 40px var(--gold-glow);
+        }
+
+        .btn-main:hover {
+            transform: scale(1.03);
+            background: #fff;
+            box-shadow: 0 10px 50px rgba(255,255,255,0.4);
+        }
+
+        .footer-info {
+            margin-top: 30px;
+            font-size: 11px;
+            color: #777;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="match-bg"></div>
+<div id="confetti-wrapper"></div>
+
+<div class="container">
+    <div class="main-card" id="card">
+        <div style="font-size: 12px; color: var(--gold); font-weight: 700; letter-spacing: 5px;">OFFICIAL WINNER</div>
+
+        <h1>GRAND<br>PRIZE</h1>
+
+        <div class="prize-box">
+            <div style="font-size: 24px; font-weight: 800;">БИЛЕТ НА ФИНАЛ</div>
+            <div style="color: var(--gold); font-size: 14px; margin-top: 5px;">+ проживание в отеле Ritz-Carlton</div>
+        </div>
+
+        <p style="font-size: 14px; color: #ccc; line-height: 1.6; margin-bottom: 40px;">
+            Поздравляем! Вы вошли в число 0.1% счастливчиков. <br>Ваш статус: <b>Подтвержден</b>.
+        </p>
+
+        <a href="http://localhost:1717/api/index" class="btn-main">
+            ЗАБРАТЬ ПРИЗ
+        </a>
+
+        <div class="footer-info">Match Day 2026 • Exclusive Access</div>
+    </div>
+</div>
+
+<script>
+    // --- СКРИПТ КОНФЕТТИ ---
+    function createConfetti() {
+        const wrapper = document.getElementById('confetti-wrapper');
+        const colors = ['#ffcc00', '#ffffff', '#ff9900', '#ffd700'];
+
+        for (let i = 0; i < 50; i++) {
+            setTimeout(() => {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+
+                // Случайные параметры
+                const size = Math.random() * 8 + 4 + 'px';
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                const left = Math.random() * 100 + 'vw';
+                const duration = Math.random() * 3 + 2 + 's';
+                const opacity = Math.random();
+
+                confetti.style.width = size;
+                confetti.style.height = size;
+                confetti.style.backgroundColor = color;
+                confetti.style.left = left;
+                confetti.style.opacity = opacity;
+                confetti.style.animationDuration = duration;
+                confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+
+                wrapper.appendChild(confetti);
+
+                // Удаляем элемент после завершения анимации
+                setTimeout(() => confetti.remove(), parseFloat(duration) * 1000);
+            }, i * 100);
+        }
+    }
+
+    // Запускаем дождь из конфетти каждые 3 секунды
+    setInterval(createConfetti, 3000);
+    createConfetti(); // Первый запуск сразу
+
+    // --- 3D ЭФФЕКТ КАРТОЧКИ ---
+    const card = document.getElementById('card');
+    document.addEventListener('mousemove', (e) => {
+        let xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+        let yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+        card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+    });
+</script>
+
+</body>
+</html>
